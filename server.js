@@ -22,7 +22,7 @@ const options = {
     }
 };
 
-var options2 = {
+const options2 = {
     method: 'GET',
     url: 'https://yh-finance.p.rapidapi.com/market/v2/get-quotes',
     params: {symbols: 'tsla', region: 'US'},
@@ -31,6 +31,35 @@ var options2 = {
       'x-rapidapi-key': API_KEY
     }
 };
+
+
+const searchSymbol = (symbol) => {
+    const apiInfo = {
+        method: 'GET',
+        url: 'https://yh-finance.p.rapidapi.com/market/v2/get-quotes',
+        params: {symbols: symbol, region: 'US'},
+        headers: {
+          'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+          'x-rapidapi-key': API_KEY
+        }
+    };
+
+    const grabDataFromSymbol = async (symbol,apiGet) => {
+        try {
+            const response = await axios.request(apiGet)
+            const data = await response.data.quoteResponse
+            console.log(data)
+            return(data)
+        } catch (err) {
+            console.log(err, () => console.log(err))
+        }
+    }
+
+    return grabDataFromSymbol(symbol, apiInfo)
+
+}
+
+
 
 const grabData = async() => {
     try {
@@ -44,6 +73,13 @@ const grabData = async() => {
 
 app.get('/', async (req,res)=> {
     const returnedData = await grabData()
+    const testing = returnedData.quoteResponse.result[0]
+    res.json(testing)
+})
+
+app.get('/stock/:symbol', async (req,res)=> {
+    
+    const returnedData = await searchSymbol(req.params.symbol)
     res.json(returnedData)
 })
 
