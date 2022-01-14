@@ -12,7 +12,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 
 
-var options = {
+const options = {
     method: 'GET',
     url: 'https://yh-finance.p.rapidapi.com/auto-complete',
     params: {q: 'tesla', region: 'US'},
@@ -22,19 +22,29 @@ var options = {
     }
 };
 
+var options2 = {
+    method: 'GET',
+    url: 'https://yh-finance.p.rapidapi.com/market/v2/get-quotes',
+    params: {symbols: 'tsla', region: 'US'},
+    headers: {
+      'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+      'x-rapidapi-key': API_KEY
+    }
+};
+
 const grabData = async() => {
     try {
-        const response = await axios.request(options)
-        console.log(response.data)
+        const response = await axios.request(options2)
+        const data = response.data
+        return(data)
     } catch (err) {
         console.log(err, () => console.log(err))
     }
-
 }
 
-app.get('/', (req,res)=> {
-    grabData()
-    res.send('Hello World')
+app.get('/', async (req,res)=> {
+    const returnedData = await grabData()
+    res.json(returnedData)
 })
 
 
