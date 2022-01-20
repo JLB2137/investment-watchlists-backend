@@ -56,7 +56,7 @@ const grabDataFromSymbol = async (apiGet) => {
         //API only allows for 5 requests per second...delay this if you have
         //over 5 products being loaded automatically by catching the error and
         //retrying the function
-        sleep(500)
+        sleep(750)
         const response = await axios.request(apiGet)
         const data = await response.data.quoteResponse
         //console.log(data)
