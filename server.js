@@ -149,11 +149,11 @@ app.put('/watchlistNaming/rename/:watchlistID', async (req,res) => {
     }
 })
 
-/*
+
 //changing the colorScheme
 app.get('/colorScheme/:userID', async (req,res) => {
     try {
-        res.json(await ColorScheme.find({user: req.params.userID}))
+        res.json(await WatchlistNaming.find({user: req.params.userID}))
     }
     catch(err) {
         res.send(err)
@@ -162,7 +162,7 @@ app.get('/colorScheme/:userID', async (req,res) => {
 
 app.post('/colorScheme/:userID', async (req,res) => {
     try {
-        res.json(ColorScheme.create(req.body))
+        res.json(WatchlistNaming.create(req.body))
     }
     catch(err) {
         res.send(err)
@@ -171,13 +171,13 @@ app.post('/colorScheme/:userID', async (req,res) => {
 
 app.put('/colorScheme/change/:colorID', async (req,res) => {
     try {
-        res.json(await ColorScheme.findByIdAndUpdate(req.params.colorID, req.body, { new: true }))
+        res.json(await WatchlistNaming.findByIdAndUpdate(req.params.colorID, req.body, { new: true }))
     }
     catch(err) {
         res.send(err)
     }
 })
-*/
+
 
 app.get('/', async (req,res)=> {
     const returnedData = await grabDataTest()
