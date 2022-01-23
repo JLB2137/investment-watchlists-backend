@@ -9,7 +9,6 @@ const {PORT,API_KEY,MONGO_DB} = process.env
 const Watchlist = require('./models/UserWatchlist')
 const WatchlistNaming = require('./models/WatchlistNaming')
 const ColorScheme = require('./models/Testing')
-const { Mongoose } = require('mongoose')
 
 //middleWare
 app.use(cors())
