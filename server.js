@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 const {PORT,API_KEY,MONGO_DB} = process.env
-const ColorScheme = require('./models/ColorScheme')
 const Watchlist = require('./models/UserWatchlist')
 const WatchlistNaming = require('./models/WatchlistNaming')
 
