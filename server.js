@@ -8,6 +8,7 @@ require('dotenv').config()
 const {PORT,API_KEY,MONGO_DB} = process.env
 const Watchlist = require('./models/UserWatchlist')
 const WatchlistNaming = require('./models/WatchlistNaming')
+const ColorScheme = require('./models/ColorScheme')
 const { Mongoose } = require('mongoose')
 
 //middleWare
@@ -127,6 +128,7 @@ app.get('/watchlist/:userID', async (req,res) => {
     }
 })
 
+//renaming watchlist
 app.get('/watchlistNaming/:userID', async (req,res) => {
     try {
         res.json(await WatchlistNaming.find({user: req.params.userID}))
@@ -148,6 +150,34 @@ app.post('/watchlistNaming/:userID', async (req,res) => {
 app.put('/watchlistNaming/rename/:watchlistID', async (req,res) => {
     try {
         res.json(await WatchlistNaming.findByIdAndUpdate(req.params.watchlistID, req.body, { new: true }))
+    }
+    catch(err) {
+        res.send(err)
+    }
+})
+
+//changing the colorScheme
+app.get('/colorScheme/:userID', async (req,res) => {
+    try {
+        res.json(await ColorScheme.find({user: req.params.userID}))
+    }
+    catch(err) {
+        res.send(err)
+    }
+})
+
+app.post('/colorScheme/:userID', async (req,res) => {
+    try {
+        res.json(ColorScheme.create(req.body))
+    }
+    catch(err) {
+        res.send(err)
+    }
+})
+
+app.put('/colorScheme/change/:watchlistID', async (req,res) => {
+    try {
+        res.json(await ColorScheme.findByIdAndUpdate(req.params.watchlistID, req.body, { new: true }))
     }
     catch(err) {
         res.send(err)
