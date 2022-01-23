@@ -8,7 +8,7 @@ require('dotenv').config()
 const {PORT,API_KEY,MONGO_DB} = process.env
 const Watchlist = require('./models/UserWatchlist')
 const WatchlistNaming = require('./models/WatchlistNaming')
-const ColorScheme = require('./models/ColorScheme.js')
+//const ColorScheme = require('./models/ColorScheme.js')
 const { Mongoose } = require('mongoose')
 
 //middleWare
@@ -151,6 +151,7 @@ app.put('/watchlistNaming/rename/:watchlistID', async (req,res) => {
     }
 })
 
+/*
 //changing the colorScheme
 app.get('/colorScheme/:userID', async (req,res) => {
     try {
@@ -178,6 +179,7 @@ app.put('/colorScheme/change/:colorID', async (req,res) => {
         res.send(err)
     }
 })
+*/
 
 app.get('/', async (req,res)=> {
     const returnedData = await grabDataTest()
