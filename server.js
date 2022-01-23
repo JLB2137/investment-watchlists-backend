@@ -175,9 +175,9 @@ app.post('/colorScheme/:userID', async (req,res) => {
     }
 })
 
-app.put('/colorScheme/change/:watchlistID', async (req,res) => {
+app.put('/colorScheme/change/:colorID', async (req,res) => {
     try {
-        res.json(await ColorScheme.findByIdAndUpdate(req.params.watchlistID, req.body, { new: true }))
+        res.json(await ColorScheme.findByIdAndUpdate(req.params.colorID, req.body, { new: true }))
     }
     catch(err) {
         res.send(err)
