@@ -86,11 +86,6 @@ const searchSymbol = async (symbol) => {
 
 
 
-app.get('/', async (req,res)=> {
-    const returnedData = await grabDataTest()
-    res.json(returnedData)
-})
-
 app.get('/stock/:symbol', async (req,res)=> {
     try {
         const returnedData = await searchSymbol(req.params.symbol)
@@ -182,6 +177,11 @@ app.put('/colorScheme/change/:colorID', async (req,res) => {
     catch(err) {
         res.send(err)
     }
+})
+
+app.get('/', async (req,res)=> {
+    const returnedData = await grabDataTest()
+    res.json(returnedData)
 })
 
 mongoose.connect(MONGO_DB)
