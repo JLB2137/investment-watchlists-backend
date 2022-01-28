@@ -55,7 +55,4 @@ const searchSymbol = async (symbol) => {
 
 }
 
-module.exports = {
-    grabDataTest,
-    searchSymbol
-}
+module.exports = searchSymbol

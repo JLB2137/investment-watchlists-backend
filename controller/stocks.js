@@ -1,13 +1,13 @@
 const axios = require('axios')
 const express = require('express')
 const stockRouter = express.Router()
-const routerFunctions = require('./routerFunctions')
-const grabDataTest = routerFunctions.grabDataTest
-const searchSymbol = routerFunctions.searchSymbol
+const searchSymbol = require('./routerFunctions')
+const Watchlist = require('../models/UserWatchlist')
+const WatchlistNaming = require('../models/WatchlistNaming')
 
 
 
-
+//get stock information
 stockRouter.get('/stock/:symbol', async (req,res)=> {
     try {
         const returnedData = await searchSymbol(req.params.symbol)
@@ -19,6 +19,7 @@ stockRouter.get('/stock/:symbol', async (req,res)=> {
 
 })
 
+//add stock to watchlist in DB
 stockRouter.post('/post', (req,res)=> {
     try{
         res.json(Watchlist.create(req.body))
@@ -28,6 +29,7 @@ stockRouter.post('/post', (req,res)=> {
 
 })
 
+//delete stock from watchlist in DB
 stockRouter.delete('/post/:id', async (req,res)=> {
     try{
         res.json(await Watchlist.findByIdAndDelete(req.params.id))
@@ -37,6 +39,7 @@ stockRouter.delete('/post/:id', async (req,res)=> {
 
 })
 
+//get watchlist from DB based on user
 stockRouter.get('/watchlist/:userID', async (req,res) => {
     try {
         res.json(await Watchlist.find({user: req.params.userID}))
@@ -45,7 +48,7 @@ stockRouter.get('/watchlist/:userID', async (req,res) => {
     }
 })
 
-//renaming watchlist
+//get user settings information
 stockRouter.get('/watchlistNaming/:userID', async (req,res) => {
     try {
         res.json(await WatchlistNaming.find({user: req.params.userID}))
@@ -55,6 +58,7 @@ stockRouter.get('/watchlistNaming/:userID', async (req,res) => {
     }
 })
 
+//post user settings information
 stockRouter.post('/watchlistNaming/:userID', async (req,res) => {
     try {
         res.json(WatchlistNaming.create(req.body))
@@ -64,6 +68,7 @@ stockRouter.post('/watchlistNaming/:userID', async (req,res) => {
     }
 })
 
+//update user settings information
 stockRouter.put('/watchlistNaming/rename/:watchlistID', async (req,res) => {
     try {
         res.json(await WatchlistNaming.findByIdAndUpdate(req.params.watchlistID, req.body, { new: true }))
@@ -71,11 +76,6 @@ stockRouter.put('/watchlistNaming/rename/:watchlistID', async (req,res) => {
     catch(err) {
         res.send(err)
     }
-})
-
-
-
-stockRouter.get('/', async (req,res)=> {
 })
 
 module.exports = stockRouter

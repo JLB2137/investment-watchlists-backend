@@ -5,8 +5,6 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 const {PORT,MONGO_DB} = process.env
-const Watchlist = require('./models/UserWatchlist')
-const WatchlistNaming = require('./models/WatchlistNaming')
 const stockRouter = require('./controller/stocks')
 
 //middleWare
