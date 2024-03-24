@@ -1,4 +1,5 @@
 require('dotenv').config()
+const axios = require('axios')
 const {API_KEY} = process.env
 //A function needed to limit API requests per second
 const sleep = (milliseconds) => {
