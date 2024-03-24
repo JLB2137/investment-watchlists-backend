@@ -11,6 +11,7 @@ const stockRouter = require('./controller/stocks')
 app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
+app.use(express.static('public'))
 
 //appRouter
 app.use('/',stockRouter)
