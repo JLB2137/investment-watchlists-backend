@@ -5,7 +5,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 const {PORT,MONGO_DB} = process.env
-const stockRouter = require('./controller/stocks')
+const stockRouter = require('../controller/stocks')
+const serverless = require('serverless-http')
 
 //middleWare
 app.use(cors())
@@ -24,3 +25,6 @@ DB.on("disconnected", () => console.log("Disconnected from DB"))
 DB.on("error", (err) => console.log("Error Connection",err))
 
 app.listen(PORT, () => console.log("connected to PORT 3001"))
+
+app.use('/.netlify/functions/server', router);
+module.exports.handler = serverless(app);
