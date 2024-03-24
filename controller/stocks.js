@@ -1,3 +1,4 @@
+const axios = require('axios')
 const express = require('express')
 const stockRouter = express.Router()
 const searchSymbol = require('./routerFunctions')
